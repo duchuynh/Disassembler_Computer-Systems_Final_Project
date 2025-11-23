@@ -7,6 +7,8 @@
 /************************************************************************/
 
 #include <stdio.h>
+#include <string.h>
+
 #include "lc4_memory.h"
 #include "lc4_loader.h"
 #include "lc4_disassembler.h"
@@ -14,7 +16,11 @@
 /* program to mimic pennsim loader and disassemble object files */
 
 int main (int argc, char** argv) {
-  
+
+  // if (argc <= 1 || argv[1] == NULL) {
+	 //  printf("error1: usage: ./lc4 <object_file>.obj");
+  // 	return 1;
+  // }
   /* leave plenty of room for the filename */
   char filename[100];
 
@@ -38,14 +44,22 @@ int main (int argc, char** argv) {
 
 	/* step 2: determine filename, then open it	*/
 	/*   TODO: extract filename from argv, pass it to open_file() */
+	strcpy(filename, argv[1]);
+	FILE* file = open_file(filename);
+	if (file == NULL) {
+		printf("open_file: File does not exist.");
+		return (1);
+	}
 
 
 	/* step 3: call function: parse_file() in lc4_loader.c */
 	/*   TODO: call function & check for errors		*/
+	parse_file(file, &memory);
 
 
 	/* step 4: call function: reverse_assemble() in lc4_disassembler.c */
 	/*   TODO: call function & check for errors	*/
+	reverse_assemble(memory);
 
 
 	/* step 5: call function: print_list() in lc4_memory.c */

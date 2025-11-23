@@ -26,3 +26,5 @@ FILE* open_file (char* file_name) ;
  * returns 0 upon successs, non-zero if an error occurs.
  */
 int parse_file (FILE* my_obj_file, row_of_memory** memory) ;
+
+int shift_bits(unsigned short int array_element, unsigned short int result_array[50], int i);

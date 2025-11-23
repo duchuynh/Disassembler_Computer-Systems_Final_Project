@@ -21,8 +21,9 @@ int add_to_list (row_of_memory** head,
   /* check to see if there is already an entry for this address and update the contents.  no additional steps required in this case */
 	row_of_memory* curr = *head;
 	while (curr) {
-		if (curr->contents == contents) {
+		if (curr->address == address) {
 			curr->contents = contents;
+			return (0);
 		}
 		curr = curr->next;
 	}
@@ -93,6 +94,7 @@ row_of_memory* search_address (row_of_memory* head,
 {
 	/* traverse the linked list, searching each node for "address"  */
 	if (head == NULL) {
+		printf("Head passed into search_address is NULL");
 		return NULL;
 	}
 	while (head) {
@@ -116,15 +118,27 @@ row_of_memory* search_opcode  (row_of_memory* head,
 {
   /* opcode parameter is in the least significant 4 bits of the short int and ranges from 0-15 */
 	/* see assignment instructions for a detailed description */
-    
+  if (head == NULL) {
+  		printf("Head passed into search_opcode is null");
+		return NULL;
+  }
+	short unsigned int opcode_lsb = opcode & 0x000F;
+
   /* traverse linked list until node is found with matching opcode in the most significant 4 bits
 	AND "assembly" field of node is NULL */
+	while (head) {
+		if (head->assembly == NULL) {
+			short unsigned int contents_msb = head->contents & 0xF000;
+			if (contents_msb == opcode_lsb) {
+				return head;
+			}
+		}
+		head = head -> next;
+	}
+  /* return pointer to node in the list if item is found */
 
-	/* return pointer to node in the list if item is found */
 
-	/* return NULL if list is empty or if no matching nodes */
-
-	return NULL ;
+  return NULL ;
 }
 
 /*
@@ -139,6 +153,7 @@ void print_list (row_of_memory* head)
 	}
 
 	/* print out a header */
+
 
     
 	/* traverse linked list, print contents of each node */
