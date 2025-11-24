@@ -77,8 +77,9 @@ void test(row_of_memory* head)
 		printf("Testing:Head is NULL");
 		return;
 	}
+	printf("[address:contents:label]\n");
 	while (head) {
-		printf("%x -> ", head->address);
+		printf("[0x%x:0x%x:%s] -> ", head->address, head->contents, head->label);
 		head = head->next;
 	}
 	if (head == NULL) {
@@ -128,7 +129,7 @@ row_of_memory* search_opcode  (row_of_memory* head,
 	AND "assembly" field of node is NULL */
 	while (head) {
 		if (head->assembly == NULL) {
-			short unsigned int contents_msb = head->contents & 0xF000;
+			short unsigned int contents_msb = head->contents & 0xF000 >> 12;
 			if (contents_msb == opcode_lsb) {
 				return head;
 			}
@@ -136,8 +137,6 @@ row_of_memory* search_opcode  (row_of_memory* head,
 		head = head -> next;
 	}
   /* return pointer to node in the list if item is found */
-
-
   return NULL ;
 }
 

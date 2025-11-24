@@ -27,4 +27,4 @@ FILE* open_file (char* file_name) ;
  */
 int parse_file (FILE* my_obj_file, row_of_memory** memory) ;
 
-int shift_bits(unsigned short int array_element, unsigned short int result_array[50], int i);
+unsigned short int shift_bits(unsigned short int array_element);

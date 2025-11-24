@@ -33,15 +33,6 @@ int main (int argc, char** argv) {
 	/* do not change this line - there should not be malloc calls in main() */
 	row_of_memory* memory = NULL ;
 
-	add_to_list(&memory, 0x0, 0);
-	add_to_list(&memory, 0x0001, 1);
-	add_to_list(&memory, 0x0003, 1);
-	add_to_list(&memory, 0x0002, 1);
-
-	//printf("%p", search_address(memory, 0x0003));
-	test(memory);
-
-
 	/* step 2: determine filename, then open it	*/
 	/*   TODO: extract filename from argv, pass it to open_file() */
 	strcpy(filename, argv[1]);
@@ -50,16 +41,15 @@ int main (int argc, char** argv) {
 		printf("open_file: File does not exist.");
 		return (1);
 	}
-
-
 	/* step 3: call function: parse_file() in lc4_loader.c */
 	/*   TODO: call function & check for errors		*/
 	parse_file(file, &memory);
+	test(memory);
 
 
 	/* step 4: call function: reverse_assemble() in lc4_disassembler.c */
 	/*   TODO: call function & check for errors	*/
-	reverse_assemble(memory);
+	//reverse_assemble(memory);
 
 
 	/* step 5: call function: print_list() in lc4_memory.c */
