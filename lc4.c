@@ -44,16 +44,15 @@ int main (int argc, char** argv) {
 	/* step 3: call function: parse_file() in lc4_loader.c */
 	/*   TODO: call function & check for errors		*/
 	parse_file(file, &memory);
-	test(memory);
-
 
 	/* step 4: call function: reverse_assemble() in lc4_disassembler.c */
 	/*   TODO: call function & check for errors	*/
-	//reverse_assemble(memory);
-
+	reverse_assemble(memory);
+	//test(memory);
 
 	/* step 5: call function: print_list() in lc4_memory.c */
 	/*   TODO: call function */
+	print_list(memory);
 
 
 	/* step 6: call function: delete_list() in lc4_memory.c */

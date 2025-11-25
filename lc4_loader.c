@@ -56,6 +56,10 @@ int parse_file (FILE* my_obj_file, row_of_memory** memory)
 			n = shift_bits(word[0]);
 			//allocate for label and add label letters
 			char* label = malloc(n + 1);
+			if (label == NULL) {
+				printf("Error allocating memory in heap.");
+				return (1);
+			}
 			for (int i = 0; i < n; i++) {
 				fread(byte, 1, 1, my_obj_file); //reading 1 byte
 				label[i] = byte[0];
@@ -69,9 +73,17 @@ int parse_file (FILE* my_obj_file, row_of_memory** memory)
 				add_to_list(memory, address, 0);
 				node = search_address(*memory, address);
 				node->label = malloc(sizeof(label) + 1);
+				if (node->label == NULL) {
+					printf("Error allocating memory in heap");
+					return (1);
+				}
 				strcpy(node->label, label);
 			}else{
 				node->label = malloc(sizeof(label) + 1);
+				if (node->label == NULL) {
+					printf("Error allocating memory in heap.");
+					return (1);
+				}
 				strcpy(node->label, label);
 			}
 			free(label);
@@ -93,8 +105,6 @@ unsigned short int shift_bits(unsigned short int array_element)
 	copy_b = copy_b & 0xFF00;
 	copy_b = copy_b >> 8;
 
-	unsigned short int result;
-
-	result = copy_a + copy_b;
+	unsigned short int result = copy_a + copy_b;
 	return result;
 }

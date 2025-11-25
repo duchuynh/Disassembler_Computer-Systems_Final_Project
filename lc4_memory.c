@@ -77,15 +77,15 @@ void test(row_of_memory* head)
 		printf("Testing:Head is NULL");
 		return;
 	}
-	printf("[address:contents:label]\n");
+	printf("[label:address:contents:assembly]\n");
 	while (head) {
-		printf("[0x%x:0x%x:%s] -> ", head->address, head->contents, head->label);
+		printf("[%s:0x%x:0x%x:%s] -> ", head->label, head->address, head->contents, head->assembly);
 		head = head->next;
 	}
 	if (head == NULL) {
 		printf("NULL");
 	}
-};
+}
 
 /*
  * search linked list by address field, returns node if found
@@ -95,7 +95,6 @@ row_of_memory* search_address (row_of_memory* head,
 {
 	/* traverse the linked list, searching each node for "address"  */
 	if (head == NULL) {
-		printf("Head passed into search_address is NULL");
 		return NULL;
 	}
 	while (head) {
@@ -129,7 +128,7 @@ row_of_memory* search_opcode  (row_of_memory* head,
 	AND "assembly" field of node is NULL */
 	while (head) {
 		if (head->assembly == NULL) {
-			short unsigned int contents_msb = head->contents & 0xF000 >> 12;
+			short unsigned int contents_msb = (head->contents & 0xF000) >> 12;
 			if (contents_msb == opcode_lsb) {
 				return head;
 			}
@@ -152,12 +151,18 @@ void print_list (row_of_memory* head)
 	}
 
 	/* print out a header */
-
-
-    
+	printf("%-20s %-20s %-20s %s\n", "<label>", "<address>", "<contents>", "<assembly>");
 	/* traverse linked list, print contents of each node */
-
-	return ;
+	while (head) {
+		if (head->label == NULL) {
+			head->label = "";
+		}
+		if (head->assembly == NULL) {
+			head->assembly = "";
+		}
+		printf("%-20s %-20.04X %-20.04X %s\n",head->label, head->address, head->contents, head->assembly);
+		head = head->next;
+	}
 }
 
 /*
