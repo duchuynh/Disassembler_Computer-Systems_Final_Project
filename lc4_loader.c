@@ -19,7 +19,6 @@ FILE* open_file(char* file_name)
 	FILE* file = fopen(file_name, "rb");
 	return file;
 }
-//TODO: Shift bits to accommodate endianness
 int parse_file (FILE* my_obj_file, row_of_memory** memory)
   
 /* remember to adjust 16-bit values read from the file for endiannness
@@ -72,14 +71,14 @@ int parse_file (FILE* my_obj_file, row_of_memory** memory)
 			if (node == NULL) {
 				add_to_list(memory, address, 0);
 				node = search_address(*memory, address);
-				node->label = malloc(sizeof(label) + 1);
+				node->label = malloc(n + 1);
 				if (node->label == NULL) {
 					printf("Error allocating memory in heap");
 					return (1);
 				}
 				strcpy(node->label, label);
 			}else{
-				node->label = malloc(sizeof(label) + 1);
+				node->label = malloc(n + 1);
 				if (node->label == NULL) {
 					printf("Error allocating memory in heap.");
 					return (1);
