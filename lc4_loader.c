@@ -47,6 +47,7 @@ int parse_file (FILE* my_obj_file, row_of_memory** memory)
 				address++;
 			}
 			//Symbol
+			
 		}else if (word[0] == 0xC3B7){
 			char byte[4];
 			fread(word, sizeof(unsigned short int), 1, my_obj_file);

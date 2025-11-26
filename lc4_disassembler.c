@@ -169,6 +169,9 @@ char* parse_contents(unsigned short int contents) {
 	char* instruction = NULL;
 	//TODO: FREE
 	instruction = malloc(sizeof(char)* 20);
+	if (instruction == NULL) {
+		printf("Error allocating memory for the instruction in parse_contents.");
+	}
 
 	char mnemonic[5] = {0};
 	char rd[5] = {0};
@@ -223,7 +226,9 @@ int reverse_assemble (row_of_memory* memory)
 			//get the instruction string
 			char* instruction = parse_contents(node->contents);
 			node->assembly = instruction;
-		}else {
+			}
+		else
+		{
 			node = node->next;
 		}
 	}

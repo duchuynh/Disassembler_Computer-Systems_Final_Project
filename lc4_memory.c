@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "lc4_memory.h"
 #include <stdlib.h>
+#include <string.h>
 
 
 /*
@@ -149,20 +150,46 @@ void print_list (row_of_memory* head)
 		printf("The list does not exist");
 		return;
 	}
-
 	/* print out a header */
 	printf("%-20s %-20s %-20s %s\n", "<label>", "<address>", "<contents>", "<assembly>");
+	char* print_label = NULL;
+	char* print_assembly = NULL;
+
 	/* traverse linked list, print contents of each node */
+	//Prints out empty label and assembly instead of (null) when the label and assembly are NULL
 	while (head) {
-		if (head->label == NULL) {
-			head->label = "";
+		if (head->label != NULL) {
+			print_label = malloc(sizeof(char)*strlen(head->label) + 1);
+			if (print_label == NULL) {
+				printf("There was an error allocating memory for print_label");
+				return;
+			}
+			strcpy(print_label, head->label);
 		}
-		if (head->assembly == NULL) {
-			head->assembly = "";
+		else {
+			print_label = malloc(2);
+			strcpy(print_label, "");
 		}
-		printf("%-20s %-20.04X %-20.04X %s\n",head->label, head->address, head->contents, head->assembly);
+		if (head->assembly != NULL) {
+			print_assembly = malloc(sizeof(char)*strlen(head->assembly) + 1);
+			if (print_assembly == NULL) {
+				printf("There was an error allocating memory for print_assembly");
+				return;
+			}
+			strcpy(print_assembly, head->assembly);
+		}else {
+			print_assembly = malloc(2);
+			strcpy(print_assembly, "");
+		}
+
+		printf("%-20s %-20.04X %-20.04X %s\n",print_label, head->address, head->contents, print_assembly);
 		head = head->next;
+		free(print_label);
+		free(print_assembly);
+		print_label = NULL;
+		print_assembly = NULL;
 	}
+
 }
 
 /*
@@ -173,5 +200,44 @@ int delete_list    (row_of_memory** head )
 	/* delete entire list node by node */
 	/* set the list head pointer to NULL upon deletion */
 
+	row_of_memory* temp1 = *head;
+	row_of_memory* temp2 = temp1->next;
+	while (temp2) {
+		if (temp2->next == NULL) {
+			if (temp2->assembly != NULL) {
+				free(temp2->assembly);
+				temp2->assembly = NULL;
+			}
+			if (temp2->label != NULL) {
+				free(temp2->label);
+				temp2->label = NULL;
+			}
+			free(temp2);
+			temp1->next = NULL;
+			temp2 = NULL;
+		}
+		if (temp2){
+			temp2 = temp2->next;
+			temp1 = temp1->next;
+		}else {
+			temp1 = *head;
+			temp2 = temp1->next;
+		}
+	}
+
+	//Deletes head
+	if (temp1->assembly != NULL) {
+		free(temp1->assembly);
+		temp1->assembly = NULL;
+	}
+	if (temp1->label != NULL) {
+		free(temp1->label);
+		temp1->label = NULL;
+	}
+	free(temp1);
+	temp1 = NULL;
+
+	*head = NULL;
+	head = NULL;
 	return 0 ;
 }
