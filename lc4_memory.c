@@ -12,6 +12,20 @@
 #include <string.h>
 
 
+row_of_memory* add_head(row_of_memory* head, short unsigned int address, short unsigned int contents) {
+
+	row_of_memory* new_node = malloc(sizeof(row_of_memory));
+	if (new_node == NULL) {
+		printf("Error allocating memory in add_to_list function");
+		return NULL;
+	}
+	new_node->address = address;
+	new_node->contents = contents;
+	new_node->label = NULL;
+	new_node->assembly = NULL;
+	new_node->next = head;
+	return new_node;
+}
 /*
  * adds a new node to a linked list pointed to by head
  */
@@ -21,6 +35,17 @@ int add_to_list (row_of_memory** head,
 {
   /* check to see if there is already an entry for this address and update the contents.  no additional steps required in this case */
 	row_of_memory* curr = *head;
+	if (curr != NULL) {
+		unsigned short int test_address = curr->address;
+	}
+	if (curr != NULL && address < curr->address) {
+		row_of_memory* new_node = add_head(curr, address, contents);
+		if (new_node == NULL) {
+			printf("There was an error while allocating memory for a new head.");
+			return -1;
+		}
+		*head = new_node;
+	}
 	while (curr) {
 		if (curr->address == address) {
 			curr->contents = contents;
