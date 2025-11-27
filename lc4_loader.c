@@ -57,6 +57,7 @@ int parse_file (FILE* my_obj_file, row_of_memory** memory)
 			//allocate for label and add label letters
 			char* label = malloc(n + 1);
 			if (label == NULL) {
+                free(label);
 				printf("Error allocating memory in heap.");
 				return (1);
 			}
@@ -74,13 +75,18 @@ int parse_file (FILE* my_obj_file, row_of_memory** memory)
 				node = search_address(*memory, address);
 				node->label = malloc(n + 1);
 				if (node->label == NULL) {
+                    free(label);
 					printf("Error allocating memory in heap");
 					return (1);
 				}
 				strcpy(node->label, label);
 			}else{
+                if (node->label != NULL){
+                    free(node->label);
+                }
 				node->label = malloc(n + 1);
 				if (node->label == NULL) {
+                    free(label);
 					printf("Error allocating memory in heap.");
 					return (1);
 				}

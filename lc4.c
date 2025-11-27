@@ -16,13 +16,12 @@
 /* program to mimic pennsim loader and disassemble object files */
 
 int main (int argc, char** argv) {
-
-  // if (argc <= 1 || argv[1] == NULL) {
-	 //  printf("error1: usage: ./lc4 <object_file>.obj");
-  // 	return 1;
-  // }
-  /* leave plenty of room for the filename */
-  char filename[100];
+	if (argc <= 1 || argv[1] == NULL) {
+		printf("error1: usage: ./lc4 <object_file>.obj");
+		return 1;
+	}
+	/* leave plenty of room for the filename */
+	char filename[100];
 
 	/*
 	 * main() holds the linked list &
@@ -35,6 +34,8 @@ int main (int argc, char** argv) {
 
 	/* step 2: determine filename, then open it	*/
 	/*   TODO: extract filename from argv, pass it to open_file() */
+
+
 	strcpy(filename, argv[1]);
 	FILE* file = open_file(filename);
 	if (file == NULL) {
@@ -48,7 +49,6 @@ int main (int argc, char** argv) {
 	/* step 4: call function: reverse_assemble() in lc4_disassembler.c */
 	/*   TODO: call function & check for errors	*/
 	reverse_assemble(memory);
-	//test(memory);
 
 	/* step 5: call function: print_list() in lc4_memory.c */
 	/*   TODO: call function */

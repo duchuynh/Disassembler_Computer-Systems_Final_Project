@@ -261,8 +261,8 @@ int delete_list    (row_of_memory** head )
 	}
 	free(temp1);
 	temp1 = NULL;
-
 	*head = NULL;
 	head = NULL;
+
 	return 0 ;
 }
