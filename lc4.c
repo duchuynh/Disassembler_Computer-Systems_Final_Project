@@ -58,7 +58,6 @@ int main (int argc, char** argv) {
 	/* step 6: call function: delete_list() in lc4_memory.c */
 	/*   TODO: call function & check for errors	*/
 	delete_list(&memory);
-	print_list(memory);
 
 
 	/* only return 0 if everything works properly */
