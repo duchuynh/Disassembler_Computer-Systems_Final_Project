@@ -193,6 +193,9 @@ void print_list (row_of_memory* head)
 		}
 		else {
 			print_label = malloc(2);
+			if (print_label == NULL) {
+				printf("There was an error allocating memory for print_label");
+			}
 			strcpy(print_label, "");
 		}
 		if (head->assembly != NULL) {
@@ -204,6 +207,9 @@ void print_list (row_of_memory* head)
 			strcpy(print_assembly, head->assembly);
 		}else {
 			print_assembly = malloc(2);
+			if (print_assembly == NULL) {
+				printf("There was an error allocating memory for print_label");
+			}
 			strcpy(print_assembly, "");
 		}
 
