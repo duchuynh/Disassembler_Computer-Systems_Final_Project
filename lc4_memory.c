@@ -172,7 +172,6 @@ void print_list (row_of_memory* head)
 {
 	/* make sure head isn't NULL */
 	if (head == NULL) {
-		printf("The list does not exist");
 		return;
 	}
 	/* print out a header */
@@ -186,6 +185,7 @@ void print_list (row_of_memory* head)
 		if (head->label != NULL) {
 			print_label = malloc(sizeof(char)*strlen(head->label) + 1);
 			if (print_label == NULL) {
+				free(print_label);
 				printf("There was an error allocating memory for print_label");
 				return;
 			}
@@ -194,13 +194,16 @@ void print_list (row_of_memory* head)
 		else {
 			print_label = malloc(2);
 			if (print_label == NULL) {
+				free(print_label);
 				printf("There was an error allocating memory for print_label");
+				return;
 			}
 			strcpy(print_label, "");
 		}
 		if (head->assembly != NULL) {
 			print_assembly = malloc(sizeof(char)*strlen(head->assembly) + 1);
 			if (print_assembly == NULL) {
+				free(print_assembly);
 				printf("There was an error allocating memory for print_assembly");
 				return;
 			}
@@ -208,7 +211,9 @@ void print_list (row_of_memory* head)
 		}else {
 			print_assembly = malloc(2);
 			if (print_assembly == NULL) {
-				printf("There was an error allocating memory for print_label");
+				printf("There was an error allocating memory for print_assembly");
+				free(print_assembly);
+				return;
 			}
 			strcpy(print_assembly, "");
 		}
@@ -230,6 +235,9 @@ int delete_list    (row_of_memory** head )
 {
 	/* delete entire list node by node */
 	/* set the list head pointer to NULL upon deletion */
+	if (*head == NULL) {
+		return 1;
+	}
 
 	row_of_memory* temp1 = *head;
 	row_of_memory* temp2 = temp1->next;

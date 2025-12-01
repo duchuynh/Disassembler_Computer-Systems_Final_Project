@@ -220,8 +220,8 @@ int reverse_assemble (row_of_memory* memory)
 	while ((node = search_opcode(node, 0x0001)) != NULL) {
 
 		//Check Code Region Validity
-		if ((node->address >= code_start && node->address <= code_end)
-			|| (node->address >= os_code_start && node->address <= os_code_end) && node->assembly == NULL) {
+		if ( ((node->address >= code_start    && node->address <= code_end) ||
+		  (node->address >= os_code_start && node->address <= os_code_end)) && node->assembly == NULL ) {
 
 			//get the instruction string
 			char* instruction = parse_contents(node->contents);

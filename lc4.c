@@ -57,7 +57,11 @@ int main (int argc, char** argv) {
 
 	/* step 6: call function: delete_list() in lc4_memory.c */
 	/*   TODO: call function & check for errors	*/
-	delete_list(&memory);
+	const int delete_result = delete_list(&memory);
+	if (delete_result == 1) {
+		printf("Null *head passed into delete_result");
+		return 1;
+	}
 
 
 	/* only return 0 if everything works properly */
