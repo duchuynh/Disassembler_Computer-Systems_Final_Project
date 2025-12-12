@@ -1,8 +1,0 @@
-This is the final project for Penn's Intro to Computer Systems course. Because I already have extensive experience in collaborating with other engineers through internships, I decided to complete this final project without a partner to get the most learning out of the project.
-
-## Overview
-This project focused on dynamic memory management of Linkedlists using C. Given .obj(binary) files in the obj_files_for_student_testing folder, the program takes the machine code from each of those files, parses them, converts them to assembly code, and finally creates Linkedlist structs that stores the machine code and assembly code into each node of the linkedlist.
-The make Build System was used to automate the task of compiling and running the code.
-
-Through completion of this project, I learned pointer management of the heap, allocations of dynamic memory, binary code parsing, and string manipulations in C.
-
