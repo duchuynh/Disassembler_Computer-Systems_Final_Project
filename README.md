@@ -8,6 +8,8 @@ The make Build System was used to automate the task of compiling and running the
 Little Computer-4 (LC4) Loader - Loads .obj files, parses the machine code from the files, and creates or modify Linked List nodes based on the instructions. The parsing follows a specific non-ASCII header format from the course.
 
 Disassembler - Translates all nodes with arithmetic 16-bit hexadecimal instructions into their assembly code equivalent. Following this, the assembly instructions are inserted as a data attribute in the node.
+<img width="1210" height="334" alt="image" src="https://github.com/user-attachments/assets/41f49844-fe56-4a77-908f-a7965e3a5c77" />
+
 
 Freeing memory - All allocated dynamic memory is freed before the conclusion of the program.
 
