@@ -5,7 +5,7 @@ This project focused on dynamic memory management of Linkedlists using C. Given 
 The make build system was used to automate the task of compiling and running the code.
 
 # Features
-Little Computer-4 (LC4) Loader - Loads .obj files, parses the machine code from the files, and creates or modify Linked List nodes based on the instructions. The parsing follows a specific non-ASCII header format from the course.
+Little Computer-4 (LC4) Loader - Loads .obj files, parses the machine code from the files, and creates or modify Linked List nodes based on the instructions. The parsing follows a specific non-ASCII header format from the course. node of the linkedlist represents a single row in memory.
 
 Disassembler - Translates all nodes with arithmetic 16-bit hexadecimal instructions into their assembly code equivalent. Following this, the assembly instructions are inserted as a data attribute in the node.
 
