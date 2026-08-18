@@ -18,6 +18,6 @@ Later on in parse_contents, we translate the machine instructions by using case 
 Freeing memory - All allocated dynamic memory is freed before the conclusion of the program.
 
 Through completion of this project, I learned pointer management of the heap, allocations of dynamic memory, binary code parsing, and string manipulations in C.
-For example, creating new instances of nodes using structs (classes in C) was good practice for objects and classes and pointer management. We used a double pointer to iterate through each of the single pointer locations in memory to check for specific opcodes or if a memory location is already instantialized and being used.
+For example, creating new instances of nodes using structs (classes in C) was good practice for objects and classes and pointer management. We used a double pointer to iterate through each of the single pointer locations in memory to check for specific opcodes or if a memory location is already instantialized and being used. Finally, we use malloc to keep the nodes in memory for the entirely of program execution and some ad-hoc mallocs to hold data even after returning from a function in C, which modifies the stack.
 
 
